@@ -13,10 +13,50 @@
 
 <body>
 
-    <div class="container">
+    <section class="container">
         <h1>Matrix machine</h1>
         <h2>This will be an in-browser matrix calculator</h2>
+    </section>
+
+    <div class="container" id="mainMatrixActivity">
+        <!-- This row holds three columns: functions, active items, matrices -->
+        <div class="row">
+
+            <!-- so far I plan to have all matrix functions here: add, scalar multiply, row reduce, etc., and an 'add function' button-->
+            <div class="col-sm-2">
+                Column 1
+            </div>
+
+            <!-- This will display selected matrices and a list of selected functions to perform-->
+            <div class="col-sm-8">
+                <table class="matrix">
+                    <tr><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>0</td><td>0</td><td>1</td></tr>
+                </table>
+
+                <table class="matrix">
+                        <tr><td>2</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                </table>
+            </div>
+
+
+            <!-- This will collect user-stored matrices and a few presets like the identity matrix, and an 'add matrix' button-->
+            <div class="col-sm-2">
+                Column 3
+            </div>
+
+
+
+
+
+
+        </div>
+
     </div>
+
 
 
 
