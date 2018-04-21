@@ -22,36 +22,93 @@
         <!-- This row holds three columns: functions, active items, matrices -->
         <div class="row">
 
-            <!-- so far I plan to have all matrix functions here: add, scalar multiply, row reduce, etc., and an 'add function' button-->
-            <div class="col-sm-2">
-                Column 1
+            <!-- This will collect user-stored matrices and a few presets like the identity matrix, and an 'add matrix' button-->
+            <div class="col-sm-2 column-matrix">
+                <div class="object-panel matrix-panel" id="newMatrix">
+                    <p>New matrix</p>
+                </div>
+                <div class="object-panel matrix-panel">
+                    <table class="matrix">
+                        <tr><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                    </table>
+                </div>
             </div>
 
             <!-- This will display selected matrices and a list of selected functions to perform-->
-            <div class="col-sm-8">
-                <table class="matrix">
-                    <tr><td>1</td><td>0</td><td>0</td></tr>
-                    <tr><td>0</td><td>1</td><td>0</td></tr>
-                    <tr><td>0</td><td>0</td><td>1</td></tr>
-                </table>
+            <div class="col-sm-6">
 
-                <table class="matrix">
+                <!-- originally hidden, this window allows us to create a new matrix-->
+                <div id="matrixConstructorWindowPrimitive">
+                    <p>Number of rows: <input type="text" id="matrixConstructorRows"></p> <p>Number of columns: <input type="text" id="matrixConstructorColumns"></p>
+                    <button id="matrixConstructorCreatePrimitiveMatrix">Generate Matrix</button>
+                </div>
+
+                <div id="matrixConstructorWindow">
+                    
+                    <div id="matrixConstructorInputBlock">
+                    <!-- dynamically populated with inputs depending on the number of rows and columns-->
+
+
+                    </div>
+                    <button id="matrixConstructorCreateMatrix">Create Matrix</button>
+                </div>
+
+                <!-- main matrix window displaying current activity-->
+                <div id="mainMatrixWindow">
+                    <table class="matrix">
+                        <tr><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                    </table>
+
+                    <table class="matrix">
                         <tr><td>2</td><td>0</td><td>0</td></tr>
                         <tr><td>0</td><td>1</td><td>0</td></tr>
                         <tr><td>0</td><td>0</td><td>1</td></tr>
-                </table>
+                    </table>
+
+                    <table class="matrix">
+                        <tr><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                    </table>
+        
+                    <table class="matrix">
+                        <tr><td>2</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                    </table>
+
+                    <table class="matrix">
+                        <tr><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                    </table>
+                </div>
             </div>
 
-
-            <!-- This will collect user-stored matrices and a few presets like the identity matrix, and an 'add matrix' button-->
-            <div class="col-sm-2">
-                Column 3
+            <!-- so far I plan to have all matrix functions here: add, scalar multiply, row reduce, etc., and an 'add function' button-->
+            <div class="col-sm-4 column-function">
+                <div class="object-panel function-panel">
+                    <p class="mat-function">
+                        reduced row echelon form 
+                    </p>
+                </div><div class="object-panel function-panel">
+                    <p class="mat-function">
+                        rational canonical form
+                    </p>
+                </div><div class="object-panel function-panel">
+                    <p class="mat-function">
+                        generalized eigenvalue decomposition
+                    </p>
+                </div><div class="object-panel function-panel">
+                    <p class="mat-function">
+                        singular value decomposition
+                    </p>
+                </div>
             </div>
-
-
-
-
-
 
         </div>
 
