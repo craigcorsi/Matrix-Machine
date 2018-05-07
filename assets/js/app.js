@@ -1,3 +1,28 @@
+// Goals for next session:
+
+/*
+    Populate function column with all existing unary / binary matrix functions
+    Create a 'matrix factory' div to place matrices to be operated on
+    Write all MATRIX-based functions, including making the identity matrix and zero matrix
+    Add onclick events to initiate these functions, from both columns
+    For now, automatically store the result as a new matrix
+*/
+
+
+// Notes when returning to this project:
+
+/* 
+    matrixClimbingIndex only works in a single session
+*/
+
+
+
+
+
+
+
+
+
 /*
 
 Matrix Machine
@@ -12,6 +37,19 @@ GLOSSARY:
 "vmr" --- 'Vector, matrix, or representation' stored as an object alongside its properties and methods.
 
 */
+
+
+//
+//
+//      Temporary client-side database holding mathematical information about each vmr
+//
+//
+//
+//
+
+var VMRDatabase = {
+
+};
 
 
 
@@ -438,7 +476,8 @@ function makeInputMatrix(i, j) {
             var cell = $('<input>').attr({
                 'size': '3',
                 'type': 'text',
-                'id': 'matrix-entry-temp-' + a + '-' + b
+                'data-row': a,
+                'data-column': b
             });
             var td = $('<td>').append(cell);
             row.append(td);
@@ -447,6 +486,8 @@ function makeInputMatrix(i, j) {
     }
     return m;
 }
+
+// create a DOM element representing a matrix
 
 
 
@@ -478,8 +519,11 @@ $(document).ready(function () {
 
     // Generate new matrix I: click on 'New matrix' button
     $('#newMatrix').on('click', function () {
-        $('#mainMatrixWindow').hide();
+        $('#mainMatrixWindow').slideUp();
+        $('#matrixConstructorWindow').slideUp();
         $('#matrixConstructorWindowPrimitive').slideDown();
+        $('#matrixConstructorInputBlock').html('');
+        $('#matrixConstructorName').val('')
     });
 
     // Generate new matrix II: specify number of rows and columns
@@ -491,8 +535,12 @@ $(document).ready(function () {
         var mat = makeInputMatrix(i, j);
         $('#matrixConstructorInputBlock').append(mat);
 
-        $('#mainMatrixWindow').hide();
+        $('#matrixConstructorWindowPrimitive').slideUp();
         $('#matrixConstructorWindow').slideDown();
+
+        // reset values from previous form
+        $('#matrixConstructorRows').val('');
+        $('#matrixConstructorColumns').val('');
     });
 
     // Generate new matrix III: specify entries and name matrix
@@ -502,16 +550,47 @@ $(document).ready(function () {
         var i = $('#matrixConstructorInputBlock').find('table').attr('data-rows');
         var j = $('#matrixConstructorInputBlock').find('table').attr('data-columns');
         
-
         // create new matrix DOM element
+        var domMat = $('<table>').attr('class', 'matrix');
 
-        // loop through inputs, grab their value or 0, place it in the corresponding matrix element
+        // loop through inputs, grab their value or 0, place it in the corresponding matrix element (virtual and DOM)
+        for (var a = 0; a < i; a++) {
+            var domRow = $('<tr>');
+            var matrixRow = [];
+            for (var b = 0; b < j; b++) {
+                var domCell = $('<td>');
+                var abValue = $('#matrixConstructorInputBlock table tr:nth-child(' + (a + 1) + ') td:nth-child(' + (b + 1) + ') input').val().trim();
+                domCell.append(abValue);
+                domRow.append(domCell);
+                matrixRow.push(abValue);
+            }
+            domMat.append(domRow);
+            matrix.push(matrixRow);
+        }
+
+        var domBox = $('<div>').attr('class', 'object-panel matrix-panel');
+        domBox.append(domMat);
 
         // append to DOM
+        $('#matrixBank').append(domBox);
 
-        // display windows accordingly
-        $('#mainMatrixWindow').show();
-        $('#matrixConstructorWindow').slideDown();
+        // store mathematical information in a database (currently just local)
+        var matrixName = $('#matrixConstructorName').val().trim();
+        var matrixIdGen = 'vmrmat' + matrixClimbingIndex;
+        matrixClimbingIndex++;
+
+        domMat.attr('id', matrixIdGen);
+        VMRDatabase[matrixIdGen] = {
+            'id': matrixIdGen,
+            'vmr': makeVMR(matrix, matrixName)
+        }
+        domBox.prepend('<h4>'+ matrixName +' =</h4>');
+
+        // display windows accordingly, reset fields
+        $('#matrixConstructorInputBlock').html('');
+        $('#matrixConstructorName').val('')
+        $('#matrixConstructorWindow').slideUp();
+        $('#mainMatrixWindow').slideDown();
     });
 
 

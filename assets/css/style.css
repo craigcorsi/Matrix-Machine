@@ -11,6 +11,7 @@ h1 {
 
 
 td {
+    display: inline-block;
     width: 30px;
     overflow-x: none;
     text-align: center;

@@ -23,7 +23,7 @@
         <div class="row">
 
             <!-- This will collect user-stored matrices and a few presets like the identity matrix, and an 'add matrix' button-->
-            <div class="col-sm-2 column-matrix">
+            <div class="col-sm-3 column-matrix" id="matrixBank">
                 <div class="object-panel matrix-panel" id="newMatrix">
                     <p>New matrix</p>
                 </div>
@@ -49,9 +49,10 @@
                     
                     <div id="matrixConstructorInputBlock">
                     <!-- dynamically populated with inputs depending on the number of rows and columns-->
-
-
                     </div>
+
+                    <label for="matrixConstructorName">Name your matrix, e.g. "A"</label><input type="text" id="matrixConstructorName">
+
                     <button id="matrixConstructorCreateMatrix">Create Matrix</button>
                 </div>
 
@@ -90,7 +91,7 @@
             </div>
 
             <!-- so far I plan to have all matrix functions here: add, scalar multiply, row reduce, etc., and an 'add function' button-->
-            <div class="col-sm-4 column-function">
+            <div class="col-sm-3 column-function">
                 <div class="object-panel function-panel">
                     <p class="mat-function">
                         reduced row echelon form 
